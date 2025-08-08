@@ -9,9 +9,10 @@ This is a collection of my personal queries and conversations with AI assistants
 
 ## The "Full Project Onboarding" Prompt
 **Your Prompt:**
+
 "Hello Gemini. My GitHub Pages site, which documents my 'Crossdeck workload based layout optimization' project, should now be indexed and accessible to you.
 
-**Your task is to perform a complete analysis of this project.**
+Your task is to perform a complete analysis of this project.
 Please start at my main site URL: https://raisun-caprisun.github.io/AISMSR-AI_shared_memory_and_search_repository/
 
 From there, navigate to the "Crossdeck" project. Review its main README.md file, and then explore the contents of its /Excel/ and /Visio/ subfolders.
@@ -26,6 +27,7 @@ Final Output: What is the ultimate result or deliverable that a user gets from t
 Essentially, I want you to explain my own project back to me as if you were a new developer who has just studied all the documentation and code."
 
 **Why This Prompt is So Effective:**
+
 Sets a Clear Goal: "Perform a complete analysis of this project."
 Provides a Starting Point: It gives the exact URL to begin the search.
 Defines the Scope: It tells me to look at a specific project and explore all relevant file types within its subfolders.
