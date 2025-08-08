@@ -1,0 +1,107 @@
+' =======================================================================================
+' PROJECT: VBA Warehouse Layout Optimizer
+' VERSION: Final
+' AUTHOR: AI Assistant & User Collaboration
+' DESCRIPTION: This Excel workbook contains a suite of VBA macros for the automatic
+'              optimization, analysis, and visualization of a warehouse layout.
+' =======================================================================================
+
+' =======================================================================================
+' PART 1: USER GUIDE (STEP-BY-STEP INSTRUCTIONS)
+' =======================================================================================
+
+' ---------------------------------------------------------------------------------------
+' STEP 1: PREPARE YOUR DATA (Worksheet "Layout")
+' ---------------------------------------------------------------------------------------
+' 1. Ensure your first worksheet in Excel is named exactly "Layout".
+' 2. Verify that you have all the required columns: ID, Name, Layer, Workload,
+'    CenterX, CenterY, Width, Height.
+' 3. Update the "Workload" column with the most current data. This is the primary
+'    driver of the optimization.
+' 4. Check that all objects (including obstacles like "Office") have a unique "ID".
+' 5. Confirm that the dimensions (Width, Height) and positions (CenterX, CenterY) of all
+'    fixed objects (Zones, Inbound, Office, Walls) are correct and reflect reality.
+
+' ---------------------------------------------------------------------------------------
+' STEP 2: CONFIGURE AND RUN THE OPTIMIZATION
+' ---------------------------------------------------------------------------------------
+' 1. Open the VBA Editor (Alt + F11).
+' 2. Find the module named "Sorting" (or similar), which contains the "OptimizeAreaPlacement" macro.
+' 3. At the top of the code, you can adjust the parameters as needed:
+'    - Const gap_mm:      The minimum safety gap between all objects.
+'    - Const step_mm:     YOUR MAIN DENSITY CONTROL. A smaller number = tighter packing
+'                         but is significantly slower. A larger number = looser packing but is faster.
+'    - preferredZones:    A list of the zone names that have the highest priority.
+' 4. Run the "OptimizeAreaPlacement" macro (press F5 or use the Macros menu).
+' 5. Wait for the process to complete. The macro will write the new, optimized
+'    coordinates into the "New_Center_X" and "New_Center_Y" columns.
+
+' ---------------------------------------------------------------------------------------
+' STEP 3: ANALYZE THE RESULTS
+' ---------------------------------------------------------------------------------------
+' 1. After a successful optimization, you can run the analytical macros.
+' 2. In the VBA editor, find the modules for the matrix generators and the cost analyzer.
+' 3. Run any of the following macros. Each one will create a new worksheet with its results:
+'    - GenerateDistanceMatrix_Euclidean:     Creates a straight-line distance matrix for the OPTIMIZED layout.
+'    - GenerateDistanceMatrix_Manhattan:     Creates an "along the axes" distance matrix for the OPTIMIZED layout.
+'    - GenerateDefaultMatrix_Euclidean:      Creates a straight-line distance matrix for the ORIGINAL layout.
+'    - GenerateDefaultMatrix_Manhattan:      Creates an "along the axes" distance matrix for the ORIGINAL layout.
+'    - GenerateDistanceHeatMap:              Creates a graphical heat map (must be run after a Euclidean matrix).
+'    - CalculateAllLayoutCosts:              Creates the final comparison table of costs and distances.
+
+' =======================================================================================
+' PART 2: FUNCTION DOCUMENTATION AND EXPLANATIONS
+' =======================================================================================
+
+' ---------------------------------------------------------------------------------------
+' Why divide by 1000 and 1000000?
+' ---------------------------------------------------------------------------------------
+' All dimension and position data in your "Layout" sheet is in MILLIMETERS (mm).
+' For better readability and management presentations, the "CalculateAllLayoutCosts"
+' macro converts these values into meters and kilometers.
+'
+' - Dividing by 1000: Converts millimeters to METERS.
+'   (Example: 56140 mm / 1000 = 56.14 m)
+'
+' - Dividing by 1000000: Converts millimeters to KILOMETERS.
+'   (Example: 284,162,297 mm / 1,000,000 = 284.16 km)
+
+' ---------------------------------------------------------------------------------------
+' Description of Main Macros
+' ---------------------------------------------------------------------------------------
+' Module "Sorting":
+'
+'   - Public Sub OptimizeAreaPlacement():
+'     The main procedure. It sorts Areas by workload and uses an intelligent grid
+'     search to place them into Zones, respecting obstacles, preferred zones,
+'     and minimum gaps. This is the only macro that modifies data in the "Layout" sheet.
+'
+'   - Public Function FindHeaderColumn(...):
+'     A public helper function that finds a column's number based on its name.
+'     It is public so that other modules can use it.
+'
+'   - Private Function FindBestPointInZone_Grid(...):
+'     A private function, the "brain" of the algorithm. For a given zone and area,
+'     it searches a grid to find the best available spot closest to the Inbound point.
+'     It uses a vertical "center-out" search for optimal visual alignment.
+
+' Modules "MatrixGenerator" / "MatrixGeneratorDefault":
+'
+'   - Public Sub GenerateDistanceMatrix_...():
+'     A suite of public macros for creating distance matrices. Each macro is
+'     standalone, reads data from the "Layout" sheet (either original or new
+'     coordinates), and creates a new worksheet with the resulting matrix.
+'
+' Module "LayoutCostCalculator":
+'
+'   - Public Sub CalculateAllLayoutCosts():
+'     The final analytical tool. It automatically performs four calculations for all
+'     scenarios (Default/Optimized, Euclidean/Manhattan). It creates a summary
+'     sheet "Cost_Calculation" with key performance indicators (KPIs) that
+'     quantify the benefits of the optimization.
+'
+'     - "Total Cost (Workload*Distance)": The primary KPI for efficiency. Lower is better.
+'     - "Average Distance per Workload Unit (m)": The average travel distance for a single unit.
+'     - "Total Weighted Distance (km)": The total distance traveled for a full operational cycle.
+'
+' =======================================================================================
