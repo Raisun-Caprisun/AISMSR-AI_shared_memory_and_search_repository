@@ -1,0 +1,107 @@
+' =======================================================================================
+' PROJEKT: VBA Warehouse Layout Optimizer
+' VERZE: Final
+' AUTOR: AI Assistant & User Collaboration (Google AI Studio, Roman Korpoš, Jakub Andar)
+' POPIS: Tento Excel soubor obsahuje sadu VBA maker pro automatickou optimalizaci,
+'        analýzu a vizualizaci layoutu skladu.
+' =======================================================================================
+
+' =======================================================================================
+' ČÁST 1: NÁVOD K POUŽITÍ (KROK ZA KROKEM)
+' =======================================================================================
+
+' ---------------------------------------------------------------------------------------
+' KROK 1: PŘÍPRAVA DAT (List "Layout")
+' ---------------------------------------------------------------------------------------
+' 1. Ujistěte se, že Váš první list v Excelu se jmenuje přesně "Layout".
+' 2. Zkontrolujte, že máte všechny potřebné sloupce: ID, Name, Layer, Workload,
+'    CenterX, CenterY, Width, Height.
+' 3. Aktualizujte sloupec "Workload" nejnovějšími daty. Toto je hlavní motor optimalizace.
+' 4. Zkontrolujte, že všechny objekty (včetně překážek jako "Office") mají unikátní "ID".
+' 5. Ověřte, že rozměry (Width, Height) a pozice (CenterX, CenterY) všech pevných
+'    objektů (Zones, Inbound, Office, Walls) jsou správné a odpovídají realitě.
+
+' ---------------------------------------------------------------------------------------
+' KROK 2: NASTAVENÍ A SPUŠTĚNÍ OPTIMALIZACE
+' ---------------------------------------------------------------------------------------
+' 1. Otevřete VBA editor (Alt + F11).
+' 2. Najděte modul s názvem "Sorting" (nebo podobným), který obsahuje makro "OptimizeAreaPlacement".
+' 3. V horní části kódu můžete upravit parametry podle potřeby:
+'    - Const gap_mm:      Minimální bezpečnostní mezera mezi všemi objekty.
+'    - Const step_mm:     VÁŠ HLAVNÍ OVLADAČ HUSTOTY. Menší číslo = těsnější, ale pomalejší.
+'                         Větší číslo = volnější, ale rychlejší.
+'    - preferredZones:    Seznam názvů zón, které mají nejvyšší prioritu.
+' 4. Spusťte makro "OptimizeAreaPlacement" (stiskněte F5 nebo přes menu Macros).
+' 5. Počkejte na dokončení. Makro zapíše nové, optimalizované souřadnice
+'    do sloupců "New_Center_X" a "New_Center_Y".
+
+' ---------------------------------------------------------------------------------------
+' KROK 3: ANALÝZA VÝSLEDKŮ
+' ---------------------------------------------------------------------------------------
+' 1. Po úspěšné optimalizaci můžete spustit analytická makra.
+' 2. V VBA editoru najděte moduly pro generování matic a analýzu nákladů.
+' 3. Spusťte libovolné z následujících maker. Každé vytvoří nový list s výsledky:
+'    - GenerateDistanceMatrix_Euclidean:     Vytvoří matici přímých vzdáleností pro OPTIMALIZOVANÝ layout.
+'    - GenerateDistanceMatrix_Manhattan:     Vytvoří matici "po osách" pro OPTIMALIZOVANÝ layout.
+'    - GenerateDefaultMatrix_Euclidean:      Vytvoří matici přímých vzdáleností pro PŮVODNÍ layout.
+'    - GenerateDefaultMatrix_Manhattan:      Vytvoří matici "po osách" pro PŮVODNÍ layout.
+'    - GenerateDistanceHeatMap:              Vytvoří grafickou heat mapu (musí být spuštěno po Euklidovské matici).
+'    - CalculateAllLayoutCosts:              Vytvoří finální srovnávací tabulku nákladů a vzdáleností.
+
+' =======================================================================================
+' ČÁST 2: DOKUMENTACE FUNKCÍ A VYSVĚTLIVKY
+' =======================================================================================
+
+' ---------------------------------------------------------------------------------------
+' Proč dělení / 1000 a / 1000000?
+' ---------------------------------------------------------------------------------------
+' Všechna data o rozměrech a pozicích ve Vašem listu "Layout" jsou v MILIMETRECH (mm).
+' Pro lepší čitelnost a prezentaci pro management převádí makro "CalculateAllLayoutCosts"
+' tyto hodnoty na metry a kilometry.
+'
+' - Dělení / 1000: Převádí milimetry na METRY.
+'   (Příklad: 56140 mm / 1000 = 56.14 m)
+'
+' - Dělení / 1000000: Převádí milimetry na KILOMETRY.
+'   (Příklad: 284,162,297 mm / 1,000,000 = 284.16 km)
+
+' ---------------------------------------------------------------------------------------
+' Popis hlavních maker
+' ---------------------------------------------------------------------------------------
+' Modul "Sorting":
+'
+'   - Public Sub OptimizeAreaPlacement():
+'     Hlavní procedura. Seřadí oblasti podle workloadu a pomocí inteligentního
+'     mřížkového vyhledávání je umístí do zón, přičemž respektuje překážky,
+'     preferované zóny a minimální mezery. Toto je jediné makro, které mění data
+'     v listu "Layout".
+'
+'   - Public Function FindHeaderColumn(...):
+'     Veřejná pomocná funkce, která najde číslo sloupce podle jeho názvu.
+'     Je veřejná, aby ji mohly používat i ostatní moduly.
+'
+'   - Private Function FindBestPointInZone_Grid(...):
+'     Soukromá funkce, "mozek" algoritmu. Pro danou zónu a oblast prohledá
+'     mřížku a najde nejlepší volné místo nejblíže k Inbound. Používá
+'     vertikální vyhledávání "od středu ven" pro optimální vizuální zarovnání.
+
+' Moduly "MatrixGenerator":
+'
+'   - Public Sub GenerateDistanceMatrix_...():
+'     Sada veřejných maker, která slouží k vytvoření matic vzdáleností.
+'     Každé makro je samostatné, čte data z listu "Layout" (buď původní, nebo
+'     nové souřadnice) a vytvoří nový list s výslednou maticí.
+'
+' Modul "LayoutCostCalculator":
+'
+'   - Public Sub CalculateAllLayoutCosts():
+'     Finální analytický nástroj. Automaticky provede čtyři výpočty pro
+'     všechny kombinace (původní/optimalizovaný, Euklidovská/Manhattan).
+'     Vytvoří souhrnný list "Cost_Calculation" s klíčovými metrikami (KPI),
+'     které kvantifikují přínos optimalizace.
+'
+'     - "Total Cost (Workload*Distance)": Hlavní KPI efektivity. Menší je lepší.
+'     - "Average Distance per Workload Unit (m)": Průměrná vzdálenost pro obsluhu jedné jednotky.
+'     - "Total Weighted Distance (km)": Celková projetá vzdálenost za celý cyklus.
+'
+' =======================================================================================
