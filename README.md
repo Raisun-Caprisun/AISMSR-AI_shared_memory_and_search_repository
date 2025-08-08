@@ -14,6 +14,6 @@ Each link below contains a full conversation.
 Formatting as follows [NAME OF THE CONVERSATION] (file_name_extract_from_conversation.md)
 
 *   THIS ONE IS JUST AN EXAMPLE!: [EXAMPLE: VBA Script for Visio and Excel](example_vba_visio_excel_convo.md)
-*   
+*   [Crossdeck workload based layout optimization](Crossdeck_workload_based_layout_optimization)
 *
 *
