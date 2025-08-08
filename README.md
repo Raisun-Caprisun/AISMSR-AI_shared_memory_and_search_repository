@@ -11,5 +11,9 @@ This is a collection of my personal queries and conversations with AI assistants
 
 **How to use:**
 Each link below contains a full conversation.
+Formatting as follows [NAME OF THE CONVERSATION] (file_name_extract_from_conversation.md)
 
-*   [EXAMPLE: VBA Script for Visio and Excel](example_vba_visio_excel_convo.md)
+*   THIS ONE IS JUST AN EXAMPLE!: [EXAMPLE: VBA Script for Visio and Excel](example_vba_visio_excel_convo.md)
+*   
+*
+*
