@@ -49,7 +49,7 @@ Essentially, I want you to explain my own project back to me as if you were a ne
 
 **How to use:**
 Each link below contains a full conversation.
-Formatting as follows [NAME OF THE CONVERSATION] (file_name_extract_from_conversation.md)
+Formatting as follows [NAME OF THE CONVERSATION OR PROJECT HERE IN GITHUB] (folder or file path to the necessary files and results in github folders)
 
 *   THIS ONE IS JUST AN EXAMPLE!: [EXAMPLE: VBA Script for Visio and Excel](example_vba_visio_excel_convo.md)
 *   [Crossdeck workload based layout optimization](Crossdeck%20workload%20based%20layout%20optimization)
