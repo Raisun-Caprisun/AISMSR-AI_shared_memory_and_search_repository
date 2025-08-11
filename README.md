@@ -29,6 +29,8 @@ After reviewing all the available .md, .bas, .cls, and .txt files, please provid
 
 Essentially, I want you to explain my own project back to me as if you were a new developer who has just studied all the documentation and code."
 
+---
+
 **Why This Prompt is So Effective:**
 
 * Sets a Clear Goal: "Perform a complete analysis of this project."
