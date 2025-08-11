@@ -2,7 +2,7 @@
 
 **Disclaimer:** Collection of my personal queries regarding various projects - I am a broke cunt and I do not have money to pay Pro versions of AI clients, and until and when Google AI Studio cuts down the Token limit, I will use this as a learning box for it to read through and understand what I want from it.
 
-This is a collection of my personal queries and conversations with AI assistants.
+This is a collection of my personal queries and projects worked upon with AI assistants. More to come.
 
 
 ---
