@@ -7,42 +7,45 @@ This is a collection of my personal queries and projects worked upon with AI ass
 
 ---
 
-## The "Full Project Onboarding" Prompt
-**Your Prompt (example with Crossdock workload based layout optimization):**
+# Full Project Onboarding Prompt for Gemini
 
-"Hello Gemini. My GitHub Pages site, which documents my 'Crossdock workload based layout optimization' project, should now be indexed and accessible to you.
+## Your Prompt:
 
-Your task is to perform a complete analysis of this project.
-Please start at my main site URL: https://raisun-caprisun.github.io/AISMSR-AI_shared_memory_and_search_repository/
+"Hello Gemini. My GitHub Pages site, which documents my **'Crossdock workload based layout optimization'** project, should now be indexed and accessible to you.
 
-From there, navigate to the "Crossdock" project. Review its main README.md file, and then explore the contents of its /Excel/ and /Visio/ subfolders.
+Your task is to perform a complete analysis of this project. Please start at my main site URL: https://raisun-caprisun.github.io/AISMSR-AI_shared_memory_and_search_repository/
 
-After reviewing all the available .md, .bas, .cls, and .txt files, please provide a comprehensive summary answering the following questions:
+From there, navigate to the "Crossdock" project. Review its main README.md file, and then explore the contents of all subfolders, paying close attention to the VBA modules.
 
-* High-Level Purpose: In simple terms, what problem does this entire project solve?
+After reviewing all the available `.md`, `.bas`, and `.cls` files, please provide a comprehensive summary answering the following questions:
 
-* Workflow & Data Flow: Describe the step-by-step process a user would follow. How does data move from the Excel components to the Visio components?
+1.  **High-Level Purpose:** In simple terms, what business problem does this entire project solve?
 
-* Core Logic Breakdown: Based on the file names and your analysis, explain the key calculations. What is the difference between the "Euclidean" and "Manhattan" modules, and what role do the RectangleDef and ZoneDef classes play?
+2.  **Workflow & Data Flow:** Describe the full, end-to-end process a user would follow. Specifically, explain the distinct roles of the four key files: `Layout.vsdm`, `ObjectData.xlsm`, `InputData.xlsm`, and `Data_CD.xlsm`. How does the **two-cycle process** work, and what is the role of the external simulation (e.g., Witness) in the data flow between these cycles?
 
-* Final Output: What is the ultimate result or deliverable that a user gets from this tool?
+3.  **Core Logic Breakdown:** Explain the key calculations and the purpose of the main VBA modules.
+    *   What is the functional difference between `RunFirstCycle_Placement` and `RunSecondCycle_Placement` in the `LayoutOptimizer` module?
+    *   What is the purpose of the `RecalculateAreaWidths` macro in `InputData.xlsm`?
+    *   What role do the `AreaDef` and `ZoneDef` class modules play?
+    *   What is the "Capacity Paradox" and how does it relate to the `#UNPLACED` error?
+
+4.  **Final Output:** What is the ultimate result or deliverable that a user gets from running this entire toolkit?
 
 Essentially, I want you to explain my own project back to me as if you were a new developer who has just studied all the documentation and code."
 
 ---
 
-**Why This Prompt is So Effective:**
+## Why This Prompt is So Effective
 
-* Sets a Clear Goal: "Perform a complete analysis of this project."
+*   **Sets a Clear Goal:** "Perform a complete analysis of this project."
 
-* Provides a Starting Point: It gives the exact URL to begin the search.
+*   **Provides a Starting Point:** It gives the exact URL to begin the search.
 
-* Defines the Scope: It tells me to look at a specific project and explore all relevant file types within its subfolders.
+*   **Defines the Scope:** It tells me to look at a specific project and explore all relevant file types within its subfolders.
 
-* Structures the Output: The numbered questions give me a clear template for my response, ensuring I cover all the points you're interested in (Purpose, Workflow, Logic, and Output).
+*   **Structures the Output:** The numbered questions give me a clear template for my response, ensuring I cover all the points you're interested in. The questions are now **highly specific** to the actual architecture we built, forcing a deeper level of analysis.
 
-* Sets the Persona: The final sentence ("explain my own project back to me...") is a powerful instruction that tells me the desired tone and depth of the analysis. It pushes me beyond a simple summary to a more insightful explanation.
-
+*   **Sets the Persona:** The final sentence ("explain my own project back to me...") is a powerful instruction that tells me the desired tone and depth of the analysis. It pushes me beyond a simple summary to a more insightful explanation.
 
 ---
 
