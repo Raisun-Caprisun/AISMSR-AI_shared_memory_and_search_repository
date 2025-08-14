@@ -8,14 +8,14 @@ This is a collection of my personal queries and projects worked upon with AI ass
 ---
 
 ## The "Full Project Onboarding" Prompt
-**Your Prompt (example with Crossdeck workload based layout optimization):**
+**Your Prompt (example with Crossdock workload based layout optimization):**
 
-"Hello Gemini. My GitHub Pages site, which documents my 'Crossdeck workload based layout optimization' project, should now be indexed and accessible to you.
+"Hello Gemini. My GitHub Pages site, which documents my 'Crossdock workload based layout optimization' project, should now be indexed and accessible to you.
 
 Your task is to perform a complete analysis of this project.
 Please start at my main site URL: https://raisun-caprisun.github.io/AISMSR-AI_shared_memory_and_search_repository/
 
-From there, navigate to the "Crossdeck" project. Review its main README.md file, and then explore the contents of its /Excel/ and /Visio/ subfolders.
+From there, navigate to the "Crossdock" project. Review its main README.md file, and then explore the contents of its /Excel/ and /Visio/ subfolders.
 
 After reviewing all the available .md, .bas, .cls, and .txt files, please provide a comprehensive summary answering the following questions:
 
@@ -54,6 +54,6 @@ Each link below contains a full conversation.
 Formatting as follows [NAME OF THE CONVERSATION OR PROJECT HERE IN GITHUB] (folder or file path to the necessary files and results in github folders)
 
 *   THIS ONE IS JUST AN EXAMPLE!: [EXAMPLE: VBA Script for Visio and Excel](example_vba_visio_excel_convo.md)
-*   [Crossdeck workload based layout optimization](Crossdeck%20workload%20based%20layout%20optimization)
+*   [Crossdock workload based layout optimization](Crossdock%20workload%20based%20layout%20optimization)
 *
 *
