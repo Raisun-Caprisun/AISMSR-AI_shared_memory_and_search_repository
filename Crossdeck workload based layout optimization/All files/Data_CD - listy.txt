@@ -1,0 +1,22 @@
+60 areas (vykládkové zóny)
+
+
+
+- Use this CostCalculator macro and enhance its' matrices generator functionality:
+1) Matrix_Optimized_Euclidean - generate it also into a file called Data_CD.xlsm (filepath is the same) into the sheet called MaticeVzdalenosti. Along with that, all values, once generated and copied, are divided by 1000, to have values in metres.
+2) Data_CD.xlsm -> tahá workload data do InputData (sloupec A je ID of Area, jmenuje se Area / sloupec B je hodnota Workloadu)
+3) Data_CD.xlsm -> tahá taky max buffer do InputData (sheet MaxArea2) do sloupce E = Max_Buffer
+
+Ověřit si zda LayoutCost opravdu generuje matice a není to jen mylný dojem (AI ti vyhodnotí) - opraveno
+Jakej je rozdíl v First cycle a Second cycle sorting a jestli by to nešlo udělat jedním makrem? - nešlo by to udělat, je to schválně, každej má jinej důvod proč se pouští
+
+Data_CD listy
+
+VZV = parametry pro simulaci (rychlosti apod.), sem se pridavaji další
+MaticeVzdalenosti - to je pro pocitani rCasJizda ve Witness - tohle generujeme pomoci makra z ObjectData (udělám já)
+Data = transformovaný arrival time (kdy dorazí do simulace, 24h formát, v min), ID zásilky, do jaké zóny, v kolik přijede auto k vyložení
+Workload = list kde je napsáno ID Areas a workload za celý den
+MaxArea = simulační část - vezme všechny Areas co potřebuju a dá mi kolik je v té zóně položek
+MaxArea2 = MaxIf/CountIf (kolik bylo maximum v té zóně)
+AreaList = seznam lokací a jejich ID pro PowerBI (1 musí být vždycky inbound)
+Vyuziti = funkce labor ve Witness - prvky jsou obsluhovaný člověkem - tohle se dá krásně počítat a padá ti z toho jejich využití/utilizace
