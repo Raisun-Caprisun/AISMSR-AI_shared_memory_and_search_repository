@@ -2,6 +2,7 @@
 ---
 
 **VISIO - ExportDefault macro**
+
 ' =========================================================================================
 '
 '         FINÁLNÍ SKRIPTY PRO EXPORT LAYOUTU Z VISIA DO EXCELU
